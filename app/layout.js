@@ -3,6 +3,9 @@ import "./globals.css";
 import { icons } from "lucide-react";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import ConvexClientProviders from "@/components/providers/ConvexProviders";
+import ModalProviders from "@/components/providers/ModalProviders";
+import { Toaster } from "sonner";
+import { EdgeStoreProvider } from "@/lib/edgeStore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +33,8 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ConvexClientProviders>
+          <EdgeStoreProvider>
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -37,8 +42,12 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
           StrorageKey="notion-theme"
         >
+          <Toaster position="bottom-center"/>
+          <ModalProviders/>
           {children}
         </ThemeProvider>
+        </EdgeStoreProvider>
+
         </ConvexClientProviders>
       </body>
     </html>
